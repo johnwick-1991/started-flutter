@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -6,32 +7,45 @@ void main() {
 }
 
 class MyApp extends StatefulWidget {
-  State<StatefulWidget> createState(){
-    return null;
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    return _MyAppState();
   }
 }
-class _MyAppState {
-  
-}
+
+class _MyAppState extends State<MyApp> {
+  List<String> _Products = ['Food Tester'];
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.blue,
           title: Text('EasyList'),
         ),
         body: Column(children: [
           Container(
-            margin: EdgeInsets.all(100.0),
-            child: ElevatedButton(onPressed: () {}, child: Text('Add product')),
+            margin: EdgeInsets.all(10.0),
+            child: ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    _Products.add('Advanced Food Tester');
+                  });
+                },
+                child: Text('Add product')),
           ),
-          Card(
-            child: Column(
-              children: <Widget>[
-                Image.asset('assets/food.webp'),
-                Text('Food Paradise')
-              ],
+          Column(
+              children: _Products.map(
+            (element) => Card(
+              child: Column(
+                children: <Widget>[
+                  Image.asset('assets/food.webp'),
+                  Text(element),
+                ],
+              ),
             ),
-          ),
+          ).toList())
         ]),
       ),
     );
